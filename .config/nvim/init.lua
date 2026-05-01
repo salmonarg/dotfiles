@@ -40,7 +40,6 @@ local function update_cursor_shape()
     local line = vim.api.nvim_get_current_line()
     local col = cursor[2]
 
-    -- char under cursor and char before cursor
     local char_at = line:sub(col + 1, col + 1)
     local char_before = line:sub(col, col)
     local brackets = "()[]{}"
@@ -90,12 +89,10 @@ local function set_colors()
     api.nvim_set_hl(0, "Operator",     { ctermfg = 255 })
     api.nvim_set_hl(0, "Delimiter",    { ctermfg = 255 })
     
-    -- background
     api.nvim_set_hl(0, "Normal",       { ctermfg = 255, bg = "none", ctermbg = "none" })
     api.nvim_set_hl(0, "NormalNC",     { bg = "none", ctermbg = "none" })
     api.nvim_set_hl(0, "SignColumn",   { bg = "none", ctermbg = "none" })
 
-    -- statusline
     api.nvim_set_hl(0, "StatusLine",   { bg = "none", ctermbg = "none", reverse = false })
     api.nvim_set_hl(0, "StatusLineNC", { bg = "none", ctermbg = "none", reverse = false })
     api.nvim_set_hl(0, "WinSeparator", { bg = "none", ctermbg = "none" })
@@ -113,13 +110,16 @@ local function set_colors()
     api.nvim_set_hl(0, "@variable.builtin", { ctermfg = 219 })
     api.nvim_set_hl(0, "@function.builtin", { ctermfg = 117 })
     api.nvim_set_hl(0, "@type.builtin", { ctermfg = 117 })
-    api.nvim_set_hl(0, "@constant.builtin", { ctermfg = 194, bold = true })
+    api.nvim_set_hl(0, "@constant.builtin", { ctermfg = 194 })
     api.nvim_set_hl(0, "@keyword", { ctermfg = 117, bold = true })
     
     api.nvim_set_hl(0, "@string.escape", { ctermfg = 225 })
     api.nvim_set_hl(0, "@punctuation.special", { ctermfg = 225 })
     api.nvim_set_hl(0, "@variable", { ctermfg = 225 })
     api.nvim_set_hl(0, "@variable.member", { ctermfg = 225 })
+
+    api.nvim_set_hl(0, "@module", { ctermfg = 255 })
+    api.nvim_set_hl(0, "@module.builtin", { ctermfg = 117 })
 
     api.nvim_set_hl(0, "@function", { ctermfg = 255 })
     api.nvim_set_hl(0, "@function.call", { ctermfg = 255 })
@@ -130,7 +130,7 @@ local function set_colors()
     api.nvim_set_hl(0, "@property", { ctermfg = 117 })        
 end
 
-local color_augroup = vim.api.nvim_create_augroup("MyCustomColors", { clear = true })
+local color_augroup = vim.api.nvim_create_augroup("Asyk", { clear = true })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
     group = color_augroup,
@@ -171,7 +171,6 @@ require("lazy").setup({
             "markdown", "markdown_inline", "bash"
         })
 
-        -- enable treesitter highlighting 
         vim.api.nvim_create_autocmd("FileType", {
             callback = function(args)
                 pcall(vim.treesitter.start, args.buf)
