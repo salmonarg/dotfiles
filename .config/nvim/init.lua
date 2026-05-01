@@ -34,6 +34,39 @@ vim.keymap.set("n", "<F10>", function()
     print(ts_msg .. " | " .. syn_msg .. " | " .. trans_msg)
 end, { desc = "Inspect Highlight Group" })
 
+-- dynamic cursor shape in insert mode
+local function update_cursor_shape()
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local line = vim.api.nvim_get_current_line()
+    local col = cursor[2]
+
+    -- char under cursor and char before cursor
+    local char_at = line:sub(col + 1, col + 1)
+    local char_before = line:sub(col, col)
+    local brackets = "()[]{}"
+
+    local is_bracket = (char_at ~= "" and brackets:find(char_at, 1, true) ~= nil) or 
+                       (char_before ~= "" and brackets:find(char_before, 1, true) ~= nil)
+
+    if is_bracket then
+        vim.opt.guicursor:append("i:block-Cursor")
+    else
+        vim.opt.guicursor:remove("i:block-Cursor")
+    end
+end
+
+local cursor_group = vim.api.nvim_create_augroup("InsertCursorBracket", { clear = true })
+vim.api.nvim_create_autocmd({ "CursorMovedI", "InsertEnter" }, {
+    group = cursor_group,
+    callback = update_cursor_shape,
+})
+vim.api.nvim_create_autocmd("InsertLeave", {
+    group = cursor_group,
+    callback = function()
+        vim.opt.guicursor:remove("i:block-Cursor")
+    end,
+})
+
 -- color scheme
 local function set_colors()
     local api = vim.api
@@ -72,6 +105,8 @@ local function set_colors()
     api.nvim_set_hl(0, "Visual",       { ctermbg = 255, ctermfg = 0 })
     api.nvim_set_hl(0, "ModeMsg",      { ctermfg = 183, bold = true }) 
     api.nvim_set_hl(0, "MatchParen",   { ctermbg = 117, ctermfg = 0 }) 
+    api.nvim_set_hl(0, "Cursor",       { ctermbg = 255, ctermfg = 0 })
+    api.nvim_set_hl(0, "TermCursor",   { ctermbg = 255, ctermfg = 0 })
 
     -- nvim tree-sitter 
     api.nvim_set_hl(0, "@string.regexp", { ctermfg = 217 })
