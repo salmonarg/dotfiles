@@ -42,7 +42,7 @@ local function update_cursor_shape()
 
     local char_at = line:sub(col + 1, col + 1)
     local char_before = line:sub(col, col)
-    local brackets = "()[]{}"
+    local brackets = "()[]{}<>"
 
     local is_bracket = (char_at ~= "" and brackets:find(char_at, 1, true) ~= nil) or 
                        (char_before ~= "" and brackets:find(char_before, 1, true) ~= nil)
