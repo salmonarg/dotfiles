@@ -11,6 +11,9 @@ opt.background = "dark"
 
 opt.termguicolors = false 
 
+vim.opt.clipboard = "unnamedplus"
+vim.o.statusline = vim.o.statusline .. " %{winwidth(0)}"
+
 -- check highlight group <F10>
 vim.keymap.set("n", "<F10>", function()
     local pos = vim.api.nvim_win_get_cursor(0)
@@ -112,7 +115,8 @@ local function set_colors()
     api.nvim_set_hl(0, "@type.builtin", { ctermfg = 117 })
     api.nvim_set_hl(0, "@constant.builtin", { ctermfg = 194 })
     api.nvim_set_hl(0, "@keyword", { ctermfg = 117, bold = true })
-    
+    api.nvim_set_hl(0, "@attribute.builtin", { ctermfg = 117, bold = true })
+
     api.nvim_set_hl(0, "@string.escape", { ctermfg = 225 })
     api.nvim_set_hl(0, "@punctuation.special", { ctermfg = 225 })
     api.nvim_set_hl(0, "@variable", { ctermfg = 225 })
@@ -178,4 +182,45 @@ require("lazy").setup({
         })
     end,
   },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("neo-tree").setup({
+        default_component_configs = {
+          icon = {
+            folder_closed = "[+]",
+            folder_open   = "[-]",
+            folder_empty  = "[ ]",
+            default       = " ",
+            highlight     = "NeoTreeFileIcon"
+          },
+          git_status = {
+            symbols = {
+              added     = "A",
+              modified  = "M",
+              deleted   = "D",
+              renamed   = "R",
+              untracked = "U",
+              ignored   = "I",
+              unstaged  = "G",
+              staged    = "S",
+              conflict  = "C",
+            }
+          }
+        },
+        filesystem = {
+          filtered_items = {
+            hide_dotfiles = false,
+            hide_gitignored = false,
+          }
+        }
+      })
+      vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { silent = true })
+    end
+  }
 })
