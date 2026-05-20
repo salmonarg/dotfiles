@@ -14,6 +14,17 @@ opt.termguicolors = false
 vim.opt.clipboard = "unnamedplus"
 vim.o.statusline = vim.o.statusline .. " %{winwidth(0)}"
 
+-- bufferline
+vim.keymap.set("n", "<leader>x", function()
+  if vim.bo.filetype == "NvimTree" then
+    return
+  end
+  vim.cmd("Bdelete")
+end, { silent = true, desc = "Delete buffer gently" })
+
+vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { silent = true })
+vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { silent = true })
+
 -- check highlight group <F10>
 vim.keymap.set("n", "<F10>", function()
     local pos = vim.api.nvim_win_get_cursor(0)
@@ -221,6 +232,53 @@ require("lazy").setup({
         }
       })
       vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { silent = true })
+    end
+  },
+  { 'famiu/bufdelete.nvim' },
+  {
+    'akinsho/bufferline.nvim',
+    version = "*",
+    config = function()
+
+      require("bufferline").setup({
+        options = {
+          mode = "buffers",
+          show_buffer_icons = false,
+          show_buffer_close_icons = false,
+          show_close_icon = false,
+          separator_style = "thin",
+          modified_icon = "[M]",
+
+          custom_filter = function(buf_number)
+            if vim.bo[buf_number].filetype == "NvimTree" then
+              return false
+            end
+            return true
+          end,
+
+          offsets = {
+            {
+              filetype = "NvimTree",
+              text = "File Explorer",
+              text_align = "left",
+              separator = false
+            }
+          }
+        },
+        highlights = {
+          buffer_selected = {
+            ctermfg = 15,
+            bold = true,
+            italic = false,
+            ctermbg = 0
+          },
+          modified_selected = {
+            ctermfg = 15,
+            ctermbg = 0,
+            bold = true
+          }
+        }
+      })
     end
   }
 })
