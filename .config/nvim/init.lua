@@ -180,11 +180,11 @@ require("lazy").setup({
             return
         end
         ts.setup()
-        ts.install({
-            "c", "python", "lua", "vim", "vimdoc", "query",
-            "javascript", "typescript", "html", "css", "json",
-            "markdown", "markdown_inline", "bash"
-        })
+        -- ts.install({
+        --     "c", "python", "lua", "vim", "vimdoc", "query",
+        --     "javascript", "typescript", "html", "css", "json",
+        --     "markdown", "markdown_inline", "bash"
+        -- })
 
         vim.api.nvim_create_autocmd("FileType", {
             callback = function(args)
@@ -243,6 +243,7 @@ require("lazy").setup({
       require("bufferline").setup({
         options = {
           mode = "buffers",
+          always_show_bufferline = false,
           show_buffer_icons = false,
           show_buffer_close_icons = false,
           show_close_icon = false,
