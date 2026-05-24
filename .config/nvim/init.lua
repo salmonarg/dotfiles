@@ -89,10 +89,10 @@ local function set_colors()
     api.nvim_set_hl(0, "NonText", { ctermfg = 146 })
     api.nvim_set_hl(0, "EndOfBuffer", { ctermfg = 146, bg = "none", ctermbg = "none" }) 
     
-    api.nvim_set_hl(0, "Statement",    { ctermfg = 117, bold = true })
-    api.nvim_set_hl(0, "Function",     { ctermfg = 117, bold = true })
+    api.nvim_set_hl(0, "Statement",    { ctermfg = 153, bold = true })
+    api.nvim_set_hl(0, "Function",     { ctermfg = 153, bold = true })
     api.nvim_set_hl(0, "Type",         { ctermfg = 255 })
-    api.nvim_set_hl(0, "StorageClass", { ctermfg = 117, bold = true })
+    api.nvim_set_hl(0, "StorageClass", { ctermfg = 153, bold = true })
     
     api.nvim_set_hl(0, "String",       { ctermfg = 223 })
     
@@ -115,34 +115,40 @@ local function set_colors()
     api.nvim_set_hl(0, "Search",       { ctermbg = 22, ctermfg = 223 })
     api.nvim_set_hl(0, "Visual",       { ctermbg = 255, ctermfg = 0 })
     api.nvim_set_hl(0, "ModeMsg",      { ctermfg = 183, bold = true }) 
-    api.nvim_set_hl(0, "MatchParen",   { ctermbg = 117, ctermfg = 0 }) 
+    api.nvim_set_hl(0, "MatchParen",   { ctermbg = 153, ctermfg = 0 })
     api.nvim_set_hl(0, "Cursor",       { ctermbg = 255, ctermfg = 0 })
     api.nvim_set_hl(0, "TermCursor",   { ctermbg = 255, ctermfg = 0 })
 
     -- nvim tree-sitter 
     api.nvim_set_hl(0, "@string.regexp", { ctermfg = 217 })
     api.nvim_set_hl(0, "@variable.builtin", { ctermfg = 219 })
-    api.nvim_set_hl(0, "@function.builtin", { ctermfg = 117 })
-    api.nvim_set_hl(0, "@type.builtin", { ctermfg = 117 })
+    api.nvim_set_hl(0, "@function.builtin", { ctermfg = 153 })
+    api.nvim_set_hl(0, "@type.builtin", { ctermfg = 153 })
     api.nvim_set_hl(0, "@constant.builtin", { ctermfg = 194 })
-    api.nvim_set_hl(0, "@keyword", { ctermfg = 117, bold = true })
-    api.nvim_set_hl(0, "@attribute.builtin", { ctermfg = 117, bold = true })
+    api.nvim_set_hl(0, "@keyword", { ctermfg = 153, bold = true })
+    api.nvim_set_hl(0, "@attribute.builtin", { ctermfg = 153, bold = true })
 
     api.nvim_set_hl(0, "@string.escape", { ctermfg = 225 })
+    api.nvim_set_hl(0, "@string.special", { ctermfg = 225 })
     api.nvim_set_hl(0, "@punctuation.special", { ctermfg = 225 })
     api.nvim_set_hl(0, "@variable", { ctermfg = 225 })
     api.nvim_set_hl(0, "@variable.member", { ctermfg = 225 })
 
     api.nvim_set_hl(0, "@module", { ctermfg = 255 })
-    api.nvim_set_hl(0, "@module.builtin", { ctermfg = 117 })
+    api.nvim_set_hl(0, "@module.builtin", { ctermfg = 153 })
 
     api.nvim_set_hl(0, "@function", { ctermfg = 255 })
     api.nvim_set_hl(0, "@function.call", { ctermfg = 255 })
     api.nvim_set_hl(0, "@function.method", { ctermfg = 255 })
     api.nvim_set_hl(0, "@function.method.call", { ctermfg = 255 })
 
-    api.nvim_set_hl(0, "@constructor", { ctermfg = 117 })
-    api.nvim_set_hl(0, "@property", { ctermfg = 117 })        
+    api.nvim_set_hl(0, "@constructor", { ctermfg = 153 })
+    api.nvim_set_hl(0, "@property", { ctermfg = 153 })
+
+    api.nvim_set_hl(0, "@tag.delimiter", { ctermfg = 146 })
+    api.nvim_set_hl(0, "@tag", { ctermfg = 224 })
+    api.nvim_set_hl(0, "@tag.attribute", { ctermfg = 230 })
+    api.nvim_set_hl(0, "@markup.raw", { ctermfg = 223 })
 end
 
 local color_augroup = vim.api.nvim_create_augroup("Asyk", { clear = true })
