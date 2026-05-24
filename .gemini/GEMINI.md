@@ -22,7 +22,7 @@ C/C++ Coding Style Guidelines:
 When generating or reviewing C code, strictly follow these modified
 Linux Kernel Coding Style rules:
 
-1. Indentation & Line Length: Use 4-character tabs for indentation.
+1. Indentation & Line Length: Use 4 spaces for indentation.
    Limit lines to 80 columns where sensible.
    Do not leave trailing whitespace.
 2. Braces (K&R Style): Place the opening brace on the same line
@@ -33,8 +33,15 @@ Linux Kernel Coding Style rules:
 
 JavaScript / TypeScript Style Guidelines:
 
-1. Indentation & Line Length: Use 4-character tabs for indentation.
+1. Indentation & Line Length: Use 4 spaces for indentation.
    Limit lines to 80 columns where sensible.
+   Do not leave trailing whitespace.
+
+Python Style Guidelines:
+
+1. Indentation & Line Length: Use 4 spaces for indentation.
+   Limit lines to 80 columns where sensible.
+   Docstrings and comments should adhere to a 72-character limit.
    Do not leave trailing whitespace.
 
 If the provided existing code follows a different formatting style 
