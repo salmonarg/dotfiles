@@ -150,6 +150,7 @@ local function set_colors()
     api.nvim_set_hl(0, "@tag.attribute", { ctermfg = 230 })
     api.nvim_set_hl(0, "@markup.raw", { ctermfg = 223 })
     api.nvim_set_hl(0, "@markup.list", { ctermfg = 225 })
+    api.nvim_set_hl(0, "@markup.raw.block", { ctermfg = 225 })
 end
 
 local color_augroup = vim.api.nvim_create_augroup("Asyk", { clear = true })
